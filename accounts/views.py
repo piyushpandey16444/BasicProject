@@ -8,3 +8,11 @@ def home_view(request):
 
 def about_view(request):
     return HttpResponse("<h1>About</h1>")
+
+
+def product_view(request):
+    return HttpResponse("<h1>Product</h1>")
+
+
+def customer_view(request):
+    return HttpResponse("<h1>Customer</h1>")
