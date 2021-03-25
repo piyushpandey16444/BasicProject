@@ -17,10 +17,15 @@ class Product(models.Model):
         ('indoor', 'Indoor'),
         ('outdoor', 'Outdoor'),
     )
+    STATUS = (
+        ('active', 'Active'),
+        ('inactive', 'Inactive'),
+    )
     name = models.CharField(max_length=250, null=True)
     price = models.FloatField(null=True)
     category = models.CharField(max_length=250, null=True, choices=CATEGORY)
     description = models.CharField(max_length=250, null=True)
+    status = models.CharField(choices=STATUS, max_length=250)
     create_date = models.DateTimeField(auto_now=True)
     write_date = models.DateTimeField(auto_now_add=True)
 
@@ -30,8 +35,10 @@ class Product(models.Model):
 
 class Order(models.Model):
     STATUS = (
-        ('active', 'Active'),
-        ('inactive', 'Inactive'),
+        ('placed', 'Placed'),
+        ('confirmed', 'Confirmed'),
+        ('dispatched', 'Dispatched'),
+        ('delivered', 'Delivered'),
     )
     # customer =
     # product = 
