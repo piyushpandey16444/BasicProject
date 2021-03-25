@@ -2,8 +2,8 @@ from django.contrib import admin
 from .models import Customer, Product, Order
 
 
-# class OrderInline(admin.TabularInline):
-#     model = Order
+class OrderInline(admin.TabularInline):
+    model = Order
 
 
 @admin.register(Customer)
@@ -11,9 +11,9 @@ class CustomerAdmin(admin.ModelAdmin):
     list_display = ['name', 'email', 'phone', 'create_date', 'write_date']
     list_display_links = ['name', 'email', 'phone', 'create_date', 'write_date']
     date_hierarchy = 'create_date'
-    # inlines = [
-    #     OrderInline,
-    #     ]
+    inlines = [
+        OrderInline,
+        ]
 
 
 @admin.register(Product)
