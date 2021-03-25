@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from .models import Product, Customer, Tag, Order
 
 
@@ -20,5 +20,9 @@ def product_view(request):
     return render(request, 'accounts/products.html', context={'product_objs': product_objs})
 
 
-def customer_view(request):
+def customer_view(request, id):
+    try:
+        customer = Customer.objects.get(id=id)
+    except Customer.DoesNotExist:
+        raise Http404("Customer does not exist")
     return render(request, 'accounts/customers.html')
