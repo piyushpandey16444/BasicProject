@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Customer, Product, Order
+from .models import Customer, Product, Order, Tag
 
 
 class OrderInline(admin.TabularInline):
@@ -28,3 +28,11 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = ['status', 'create_date', 'write_date']
     list_display_links = ['status', 'create_date', 'write_date']
     date_hierarchy = 'create_date'
+
+
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    list_display = ['name']
+    list_display_links = ['name']
+    
+

@@ -11,7 +11,15 @@ class Customer(models.Model):
     def __str__(self):
         return self.name
 
+
+class Tag(models.Model):
+    name = models.CharField(max_length=250, null=True)
+
+    def __str__(self):
+        return self.name
     
+
+
 class Product(models.Model):
     CATEGORY = (
         ('indoor', 'Indoor'),
@@ -24,7 +32,8 @@ class Product(models.Model):
     name = models.CharField(max_length=250, null=True)
     price = models.FloatField(null=True)
     category = models.CharField(max_length=250, null=True, choices=CATEGORY)
-    description = models.CharField(max_length=250, null=True)
+    description = models.CharField(max_length=250, null=True, blank=True)
+    tags = models.ManyToManyField("accounts.Tag")
     status = models.CharField(choices=STATUS, max_length=250, default='active')
     create_date = models.DateTimeField(auto_now=True)
     write_date = models.DateTimeField(auto_now_add=True)
@@ -33,13 +42,9 @@ class Product(models.Model):
         return self.name
 
 
-class Tag(models.Model):
-    name = models.CharField(max_length=250, null=True)
-
-
 class Order(models.Model):
     STATUS = (
-        ('placed', 'Placed'),
+        ('pending', 'Pending'),
         ('confirmed', 'Confirmed'),
         ('dispatched', 'Dispatched'),
         ('delivered', 'Delivered'),
@@ -49,4 +54,3 @@ class Order(models.Model):
     create_date = models.DateTimeField(auto_now=True)
     write_date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(choices=STATUS, max_length=250, null=True)
-    tags = models.ManyToManyField("accounts.Tag")
