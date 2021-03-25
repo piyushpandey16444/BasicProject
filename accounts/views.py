@@ -25,8 +25,8 @@ def customer_view(request, id):
         customer = Customer.objects.get(id=id)
     except Customer.DoesNotExist:
         raise Http404("Customer does not exist")
-    orders = Order.objects.filter(customer=customer)
-    total_orders = Order.objects.filter(customer=customer).count()
+    orders = customer.order_set.all()
+    total_orders = orders.count()
     context = {
         'customer': customer, 
         'orders': orders,

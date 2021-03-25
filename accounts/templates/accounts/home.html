@@ -19,6 +19,7 @@ Dashboard
                 <thead class="thead-light">
                     <tr>
                         <th></th>
+                        <th></th>
                         <th>Customers</th>
                         <th>Phone Number</th>
                     </tr>
@@ -27,6 +28,7 @@ Dashboard
                 {% for cx in customer_objs %}
                     <tr>
                         <td></td>
+                        <td><a href="{% url 'customer' cx.id %}" class="btn btn-sm btn-block btn-outline-dark">View</a></td>
                         <td>{{ cx.name }}</td>
                         <td>{{ cx.phone }}</td>
                     </tr>
