@@ -18,6 +18,7 @@ Dashboard
             <table class="table table-sm table-bordered table-hover">
                 <thead class="thead-light">
                     <tr>
+                        <th></th>
                         <th>Customers</th>
                         <th>Phone Number</th>
                     </tr>
@@ -25,6 +26,7 @@ Dashboard
 
                 {% for cx in customer_objs %}
                     <tr>
+                        <td></td>
                         <td>{{ cx.name }}</td>
                         <td>{{ cx.phone }}</td>
                     </tr>
@@ -43,6 +45,7 @@ Dashboard
                 <table class="table table-sm table-bordered table-hover">
                     <thead class="thead-light">
                         <tr>
+                            <th>Customer</th>
                             <th>Product</th>
                             <th>Status</th>
                             <th>Date Ordered</th>
@@ -53,9 +56,10 @@ Dashboard
                 
                     {% for order in order_objs %}
                         <tr>
+                            <td>{{ order.customer }}</td>
                             <td>{{ order.product }}</td>
                             <td>{{ order.status }}</td>
-                            <td>{{ order.date_created }}</td>
+                            <td>{{ order.create_date }}</td>
                             <td><a href="#" class="btn btn-primary btn-sm btn-block">Update</a></td>
                             <td><a href="#" class="btn btn-danger btn-sm btn-block">Delete</a></td>
                         </tr>
