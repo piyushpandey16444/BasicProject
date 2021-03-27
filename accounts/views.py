@@ -53,13 +53,13 @@ def update_customer(request, id):
         customer = Customer.objects.get(id=id)
     except Customer.DoesNotExist:
         raise Http404("Customer does not exist")
-    form = CustomerForm()
-    context = {"form": form}
+    form = CustomerForm(instance=customer)
     if request.method == "POST":
         form = CustomerForm(data=request.POST, instance=customer)
         if form.is_valid():
             form.save()
             return redirect('/')
 
+    context = {"form": form}
     return render(request, 'accounts/create_form.html', context=context)
     
