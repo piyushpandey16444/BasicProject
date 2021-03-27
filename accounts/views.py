@@ -76,19 +76,19 @@ def create_order(request):
     return render(request, 'accounts/create_order_form.html', context=context)
 
 
-# def update_order(request, id):
-#     try:
-#         customer = Customer.objects.get(id=id)
-#     except Customer.DoesNotExist:
-#         raise Http404("Customer does not exist")
-#     form = CustomerForm(instance=customer)
-#     if request.method == "POST":
-#         form = CustomerForm(data=request.POST, instance=customer)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('/')
+def update_order(request, id):
+    try:
+        order = Order.objects.get(id=id)
+    except Order.DoesNotExist:
+        raise Http404("Order does not exist")
+    form = OrderForm(instance=order)
+    if request.method == "POST":
+        form = OrderForm(data=request.POST, instance=order)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
 
-#     context = {"form": form}
-#     return render(request, 'accounts/create_form.html', context=context)
+    context = {"form": form}
+    return render(request, 'accounts/create_order_form.html', context=context)
 
     
