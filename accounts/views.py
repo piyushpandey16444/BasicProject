@@ -38,11 +38,28 @@ def customer_view(request, id):
 
 def create_customer(request):
     form = CustomerForm()
-    context = {"form": form}
     if request.method == "POST":
         form = CustomerForm(data=request.POST)
         if form.is_valid():
             form.save()
             return redirect('/')
 
+    context = {"form": form}
     return render(request, 'accounts/create_form.html', context=context)
+
+
+def update_customer(request, id):
+    try:
+        customer = Customer.objects.get(id=id)
+    except Customer.DoesNotExist:
+        raise Http404("Customer does not exist")
+    form = CustomerForm()
+    context = {"form": form}
+    if request.method == "POST":
+        form = CustomerForm(data=request.POST, instance=customer)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+    return render(request, 'accounts/create_form.html', context=context)
+    
