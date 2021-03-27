@@ -39,4 +39,9 @@ def customer_view(request, id):
 def create_customer(request):
     form = CustomerForm()
     context = {"form": form}
+    if request.method == "POST":
+        form = CustomerForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+
     return render(request, 'accounts/create_form.html', context=context)
