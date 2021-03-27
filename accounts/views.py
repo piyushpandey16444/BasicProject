@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
 from .models import Product, Customer, Tag, Order
 from .forms import CustomerForm
@@ -43,5 +43,6 @@ def create_customer(request):
         form = CustomerForm(data=request.POST)
         if form.is_valid():
             form.save()
+            return redirect('/')
 
     return render(request, 'accounts/create_form.html', context=context)
