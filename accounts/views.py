@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
 from .models import Product, Customer, Tag, Order
-from .forms import CustomerForm
+from .forms import CustomerForm, OrderForm
 
 
 def home_view(request):
@@ -10,7 +10,7 @@ def home_view(request):
     pending_orders = Order.objects.filter(status='pending').count()
     delivered_orders = Order.objects.filter(status='delivered').count()
     customer_objs = Customer.objects.all()
-    order_objs = Order.objects.all()
+    order_objs = Order.objects.all()[0:5]
     context = {'customer_objs': customer_objs, 'order_objs': order_objs, 
     'total_orders': total_orders, 'delivered_orders': delivered_orders, 'pending_orders': pending_orders,}
     return render(request, 'accounts/home.html', context=context)
@@ -62,4 +62,33 @@ def update_customer(request, id):
 
     context = {"form": form}
     return render(request, 'accounts/create_form.html', context=context)
+
+
+def create_order(request):
+    form = OrderForm()
+    if request.method == "POST":
+        form = OrderForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+    context = {"form": form}
+    return render(request, 'accounts/create_order_form.html', context=context)
+
+
+# def update_order(request, id):
+#     try:
+#         customer = Customer.objects.get(id=id)
+#     except Customer.DoesNotExist:
+#         raise Http404("Customer does not exist")
+#     form = CustomerForm(instance=customer)
+#     if request.method == "POST":
+#         form = CustomerForm(data=request.POST, instance=customer)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('/')
+
+#     context = {"form": form}
+#     return render(request, 'accounts/create_form.html', context=context)
+
     
