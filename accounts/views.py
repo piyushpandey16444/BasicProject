@@ -37,4 +37,6 @@ def customer_view(request, id):
 
 
 def create_customer(request):
-    pass
+    form = CustomerForm()
+    context = {"form": form}
+    return render(request, 'accounts/create_form.html', context=context)
