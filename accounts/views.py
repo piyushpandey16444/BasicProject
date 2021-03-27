@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, Http404
 from .models import Product, Customer, Tag, Order
+from .forms import CustomerForm
 
 
 def home_view(request):
@@ -33,3 +34,7 @@ def customer_view(request, id):
         'total_orders': total_orders
         }
     return render(request, 'accounts/customers.html', context=context)
+
+
+def create_customer(request):
+    pass
