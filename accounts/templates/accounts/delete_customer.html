@@ -1,0 +1,22 @@
+{% extends 'accounts/main.html' %}
+
+{% block title %}
+    Delete Customer
+{% endblock title %}
+
+{% block content %}
+
+    <br>
+
+    <div class="align-items-center col-md-5">
+        <h5>Delete Customer</h5>
+        <form action="#" method="POST">
+        {% csrf_token %}
+        <div class="card card-body">
+            <h5>Do you really want to delete <span class="">{{customer}}</span> ?</h5>
+            <input class="btn btn-sm btn-primary mt-4" type="submit" value="Yes">
+            <a href="{% url 'customer' customer.id %}" class="btn btn-sm btn-danger mt-4">Cancel</a>
+        </div>
+        </form>
+    </div>
+{% endblock content %}

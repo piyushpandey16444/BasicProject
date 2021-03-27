@@ -58,7 +58,7 @@ def update_customer(request, id):
         form = CustomerForm(data=request.POST, instance=customer)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect(f'/customer/{customer.id}/')
 
     context = {"form": form}
     return render(request, 'accounts/create_form.html', context=context)
@@ -90,5 +90,17 @@ def update_order(request, id):
 
     context = {"form": form}
     return render(request, 'accounts/create_order_form.html', context=context)
+
+
+def delete_customer(request, id):
+    try:
+        get_customer = Customer.objects.get(id=id)
+    except Customer.DoesNotExist:
+        raise Http404("Customer Does not Exist !")
+    if request.method == "POST":
+        get_customer.delete()
+        return redirect('/')
+    context = { 'customer': get_customer}
+    return render(request, 'accounts/delete_customer.html', context=context)
 
     
