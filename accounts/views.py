@@ -60,7 +60,7 @@ def update_customer(request, id):
             form.save()
             return redirect(f'/customer/{customer.id}/')
 
-    context = {"form": form}
+    context = {"form": form, "customer": customer}
     return render(request, 'accounts/create_form.html', context=context)
 
 
@@ -76,7 +76,7 @@ def create_order(request, id):
             form.save()
             return redirect('/')
 
-    context = {"form": form}
+    context = {"form": form, 'customer': customer}
     return render(request, 'accounts/create_order_form.html', context=context)
 
 
@@ -92,7 +92,7 @@ def update_order(request, id):
             form.save()
             return redirect('/')
 
-    context = {"form": form}
+    context = {"form": form, 'customer': order.customer}
     return render(request, 'accounts/create_order_form.html', context=context)
 
 

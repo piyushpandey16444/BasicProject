@@ -6,7 +6,9 @@ Products
 
 
 {% block content %}
-
+<br>
+<a href="{% url 'home' %}" class="ml-3 btn active btn-info">Go Back</a>
+<br>
 <br>
 
 <div class="row container-fluid">
@@ -15,20 +17,27 @@ Products
             <h5>Products</h5>
         </div>
         <div class="card card-body">
-            <table class="table table-success">
-                <tr>
-                    <th>Product</th>
-                    <th>Category</th>
-                    <th>Price</th>
-                </tr>
-                {% for product in product_objs %}
-                    <tr>
-                        <td>{{ product.name }}</td>
-                        <td>{{ product.price }}</td>
-                        <td>{{ product.category }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                <caption>List of products</caption>
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    {% for product in product_objs %}
+                        <tr>
+                            <td>{{ product.name }}</td>
+                            <td>{{ product.price }}</td>
+                            <td>{{ product.category }}</td>
+                            <td>{{ product.status }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
         </div>
     </div>
 </div>

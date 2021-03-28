@@ -6,17 +6,38 @@
 
 {% block content %}
 
+    {% if customer %}
+        <br>
+        <a href="{% url 'customer' customer.id %}" class="ml-3 btn active btn-info">Go Back</a>
+        <br>
+    {% else %}
+        <br>
+        <a href="{% url 'home' %}" class="ml-3 btn active btn-info">Go Back</a>
+        <br>
+    {% endif %}
     <br>
 
     <div class="align-items-center col-md-5">
-        <h5>Create Customer</h5>
-        <form action="#" method="POST">
-        {% csrf_token %}
-        <div class="card card-body">
-            {{form}}
-            <input class="btn btn-sm btn-primary mt-4" type="submit" value="Save">
-            <a href="{% url 'home' %}" class="btn btn-sm btn-danger mt-4">Cancel</a>
-        </div>
-        </form>
+        {% if customer %}
+            <h5>Update Customer</h5>
+            <form action="#" method="POST">
+            {% csrf_token %}
+            <div class="card card-body">
+                {{form}}
+                <input class="btn btn-sm btn-primary mt-4" type="submit" value="Save">
+                <a href="{% url 'home' %}" class="btn btn-sm btn-danger mt-4">Cancel</a>
+            </div>
+            </form>
+        {% else %}
+            <h5>Create Customer</h5>
+            <form action="#" method="POST">
+            {% csrf_token %}
+            <div class="card card-body">
+                {{form}}
+                <input class="btn btn-sm btn-primary mt-4" type="submit" value="Save">
+                <a href="{% url 'home' %}" class="btn btn-sm btn-danger mt-4">Cancel</a>
+            </div>
+            </form>
+        {% endif %}
     </div>
 {% endblock content %}
