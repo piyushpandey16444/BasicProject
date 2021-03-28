@@ -25,8 +25,8 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['status', 'create_date', 'write_date']
-    list_display_links = ['status', 'create_date', 'write_date']
+    list_display = ['customer', 'product', 'status', 'create_date', 'write_date']
+    list_display_links = ['customer', 'product', 'status', 'create_date', 'write_date']
     date_hierarchy = 'create_date'
 
 
