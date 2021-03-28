@@ -64,8 +64,12 @@ def update_customer(request, id):
     return render(request, 'accounts/create_form.html', context=context)
 
 
-def create_order(request):
-    form = OrderForm()
+def create_order(request, id):
+    try:
+        customer = Customer.objects.get(id=id)
+    except Customer.DoesNotExist:
+        raise Http404("Customer does not exist")
+    form = OrderForm(initial={'customer': customer})
     if request.method == "POST":
         form = OrderForm(data=request.POST)
         if form.is_valid():
