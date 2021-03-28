@@ -108,3 +108,13 @@ def delete_customer(request, id):
     return render(request, 'accounts/delete_customer.html', context=context)
 
     
+def delete_order(request, id):
+    try:
+        get_order = Order.objects.get(id=id)
+    except Customer.DoesNotExist:
+        raise Http404("Order Does not Exist !")
+    if request.method == "POST":
+        get_order.delete()
+        return redirect('/')
+    context = { 'order': get_order}
+    return render(request, 'accounts/delete_customer.html', context=context)

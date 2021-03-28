@@ -73,8 +73,8 @@ Customer
                         <td>{{order.product.category}}</td>
                         <td>{{order.create_date}}</td>
                         <td>{{order.status}}</td>
-                        <td><a href="#" class="btn btn-sm btn-info">Update</a></td>
-                        <td><a href="#" class="btn btn-sm btn-danger">Remove</a></td>
+                        <td><a href="{% url 'update-order' order.id %}" class="btn btn-sm btn-info">Update</a></td>
+                        <td><a href="{% url 'delete-order' order.id %}" class="btn btn-sm btn-danger">Remove</a></td>
                     </tr>
                     {% endfor %}
                     
